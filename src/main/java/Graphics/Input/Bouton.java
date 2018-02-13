@@ -73,6 +73,7 @@ public class Bouton extends JButton implements MouseListener{
 
     public void mouseClicked(MouseEvent event) {
 
+        System.out.println("pouet");
     }
 
 

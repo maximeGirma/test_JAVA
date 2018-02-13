@@ -7,11 +7,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 
-public class Fenetre extends JFrame{
+public class Fenetre extends JFrame implements MouseListener{
 
-
+    public int compteur = 0;
     //declaration des variables necessaires au menu et recherche
     private JMenu fichiers = new JMenu("Fichier");//JMenu pour les... menus
     private JMenu prererences = new JMenu("Preferences");
@@ -27,7 +29,13 @@ public class Fenetre extends JFrame{
     private Object[][] data;
 
     private JTable tab_result_search;
-    private String[] title;
+
+
+    JPanel main_content;
+    JPanel main_content2;
+    JPanel recherche;
+
+
 
     public Fenetre() {
 
@@ -65,7 +73,7 @@ public class Fenetre extends JFrame{
         gl.setVgap(10);// de l'espace entre les boutons du menu
 
         JButton menu_all = new JButton("Tout");
-        menu_all.addActionListener(new actionListener1());
+        menu_all.addMouseListener(this);
 
         JButton menu_film = new JButton("Films");
 
@@ -79,7 +87,7 @@ public class Fenetre extends JFrame{
 
 
         input.setPreferredSize(new Dimension(150,25));
-        JPanel recherche = new JPanel();
+        recherche = new JPanel();
 
         recherche.setPreferredSize(new Dimension (500,40));
         recherche.setLayout(new BorderLayout());
@@ -166,10 +174,10 @@ public class Fenetre extends JFrame{
                 {"nom_random","genre_random","1/4"}
         };
 
-        JTable tab_result_search = new JTable(data,title);
+        tab_result_search = new JTable(data,title);
 
 
-        JPanel main_content = new JPanel();
+        main_content = new JPanel();
         main_content.setLayout(new BorderLayout());
         main_content.add(recherche,BorderLayout.NORTH);
         main_content.add(new JScrollPane(tab_result_search),BorderLayout.SOUTH);
@@ -187,15 +195,66 @@ public class Fenetre extends JFrame{
 
     }
 
+    @Override
+    public void mouseClicked(MouseEvent mouseEvent) {
 
+        test();
+        this.getContentPane().remove(main_content);
+        test();
+        this.main_content2 = new JPanel();
+        this.main_content2.setLayout(new BorderLayout());
+        test();
+        this.main_content2.add(this.recherche,BorderLayout.NORTH);
+        test();
+        Object[][] pouet = {{"sblah","meh","kibetilini"}};
+        String title2[] = {"Titre","Genre","Note"};
+        test();
+        JTable temporary = new JTable(pouet,title2);
+        test();
+        this.main_content2.add(new JScrollPane(temporary),BorderLayout.SOUTH);
+        test();
+        this.getContentPane().add(this.main_content2,BorderLayout.EAST);
+
+    }
+    public void test(){
+        System.out.println("jusqu'ici tout va bien"+compteur);
+        compteur++;
+    }
+    @Override
+    public void mousePressed(MouseEvent mouseEvent) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent mouseEvent) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent mouseEvent) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent mouseEvent) {
+
+    }
+
+
+    /*
     public class actionListener1 implements ActionListener {
 
 
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            Object[][] temp = {{"pouet1","pouet2","pouet3"}};
-            tab_result_search = new JTable(temp,title);
+
+         /*Object[][] data = {
+                 {"test","test1","test2"}
+                };
+            System.out.println("pouet");
+
+         //Fenetre.this.getContentPane().add(new JLabel("pouet"),2);
         }
     }
-
+*/
 }
